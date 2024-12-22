@@ -1,6 +1,6 @@
 # RX-8 PCM Reverse Engineering
 
-Here is a dump of all things on the journey to reverse engineer the Mazda RX-8 ECU/PCM
+Here is a dump of all things on the journey to reverse engineer the Mazda RX-8 ECU/PCM and define the tables and modified values for use in ROMraider
 
 
 Folders:
@@ -22,6 +22,6 @@ More info, and because I can't figure out how to link the repos:
 
 RX8Man - PCM/ECM/ECU reflash tool for use with a Tactrix: https://github.com/Rx8Man/Rx8Man/releases
 
-My current ECU definitions: https://github.com/equinox311/RX8Defs
+My current Romraider ECU definitions: https://github.com/equinox311/RX8Defs
 
 RX8Man's ECU definitions: https://github.com/Rx8Man/RX8Defs
