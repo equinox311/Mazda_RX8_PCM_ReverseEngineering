@@ -3,6 +3,9 @@
 Here is a dump of all things on the journey to reverse engineer the Mazda RX-8 ECU/PCM and define the tables and modified values for use in ROMraider
 
 
+Reverse Engineering Tool: Ghidra - https://ghidra-sre.org/
+ROMRaider - https://www.romraider.com/
+
 Folders:
 
 Data_Binaries
