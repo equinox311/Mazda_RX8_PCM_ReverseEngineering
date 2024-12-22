@@ -1,12 +1,26 @@
-# RX-8 PCM Flash ROM Files
-Flash ROM dumps I have pulled from RX-8 PCMs
+# RX-8 PCM Reverse Engineering
 
-ECU ID (I think) 60E0FC00 notable addresses off the hop: 
+Here is a dump of all things on the journey to reverse engineer the Mazda RX-8 ECU/PCM
 
-0x1FF5: SBL_END, end of bootloader section??
 
-0x2000: 60E0FC00 Copr.DENSO2000, application jump address?
+Folders:
+-Data_Binaries
 
-0x5D90C: MazdA, this is actually the secret word for the programming access seed/key algorithm
+	These are live data binaries, and some ROM files I have taken
 
-0x6D300: N3Z2EBWW.Z05 60E0FC00 Copr.DENSO2000SSW-N3Z2EU000.HEX, Calibration software start address + cal ID ??
+-Ghidra_Archives
+	
+	This is where I am stashing my latest ghidra archives. Ghidra (from what I can tell) doesn't have a great way to collaborate, so this is the best I can do
+
+-Stock_ROMs
+
+	Uploaded Stock ROM binary files
+
+
+More info, and because I can't figure out how to link the repos:
+
+RX8Man - PCM/ECM/ECU reflash tool for use with a Tactrix: https://github.com/Rx8Man/Rx8Man/releases
+
+My current ECU definitions: https://github.com/equinox311/RX8Defs
+
+RX8Man's ECU definitions: https://github.com/Rx8Man/RX8Defs
