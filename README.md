@@ -25,6 +25,6 @@ More info, and because I can't figure out how to link the repos:
 
 RX8Man - PCM/ECM/ECU reflash tool for use with a Tactrix: https://github.com/Rx8Man/Rx8Man/releases
 
-My current Romraider ECU definitions: https://github.com/equinox311/RX8Defs
+My current Romraider ECU definitions + RomRaider logger version that supports Mazda CAN: https://github.com/equinox311/RX8Defs
 
 RX8Man's ECU definitions: https://github.com/Rx8Man/RX8Defs
