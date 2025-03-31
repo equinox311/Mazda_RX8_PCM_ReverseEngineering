@@ -1,5 +1,9 @@
 # RX-8 PCM Reverse Engineering
 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=GA2ATM7VC5LZL&currency_code=USD&source=url)
+
+
 Here is a dump of all things on the journey to reverse engineer the Mazda RX-8 ECU/PCM and define the tables and modified values for use in ROMraider
 
 
