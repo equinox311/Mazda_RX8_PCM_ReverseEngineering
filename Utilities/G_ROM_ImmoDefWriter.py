@@ -9,13 +9,15 @@
 
 import argparse
 import re
+import sys
 
 address1_offset = 0x4A
 address2_offset = 0x4
 address3_offset = 0x38
 w_rke_offset = 0xf7 + 0x355
 
-immo_start_pattern ="B56E000960D0600C88008D1100098801"
+immo_start_pattern =    "B56E000960D0600C88008D1100098801"
+immo_start_pattern2 =   "B560000960D0600C88008D1100098801"
 
 output_file = "defs.txt"
 
@@ -28,7 +30,7 @@ def search_input(input_binary_filename):
         input_ecu_id = data.decode()
         print("ECU ID Found: %s" %input_ecu_id)
 
-def search_immo_start(input_binary_filename):
+def search_immo_start(input_binary_filename,pattern):
 
     with open(input_binary_filename, 'rb') as file:
 
@@ -39,17 +41,18 @@ def search_immo_start(input_binary_filename):
 
             hexdata = file.read(1).hex().upper()
 
-            if re.search(immo_start_pattern[:2], hexdata):
+            if re.search(pattern[:2], hexdata):
                 #print("Potential Start of Immo")
                 
                 hexdata = file.read(15).hex().upper()
-                if re.search(immo_start_pattern[2:32], hexdata):
+                if re.search(pattern[2:32], hexdata):
                     address = hex(file.tell()- 16) 
                     print(f"Start of Immo Found at {address}")
                     return address
             if file.tell() >= (int(0x80000) - 16):
-                print("Immo not found or string incorrect")
-                break;
+                #print("Immo not found or string incorrect")
+                address = hex(file.tell()- 16) 
+                return address;
 
 def get_immo_patch_addresses(start_address,input_binary_filename):
 
@@ -103,7 +106,7 @@ def write_immo_patch_defs(start_address,val1,val2,val3,val4,file):
 					0B 00 09 D1 2B 60 10 20 08 8F 06 00 09 D2 29 E5 01 42 0B 64 D0 A0 01\n \
 					2D 00 2D E0 E3 03 62 D0 62 2C 32 33 8F 0D 00 09 E1 01\" />\n \
 		</table>\n\n")
-        file.write(f"<table name=\"Immobilizer Disable - With RKE Installed\" storageaddress=\"{val4}\">\n") 
+        file.write(f"<table name=\"Immobilizer Disable - With RKE Installed\" storageaddress=\"{val4}\"/>\n") 
 
 def main():
 
@@ -116,7 +119,15 @@ def main():
 
     #Check ECU ID
     search_input(args.binary_file)
-    immo_start_address = search_immo_start(args.binary_file)
+    immo_start_address = search_immo_start(args.binary_file,immo_start_pattern)
+    
+    #Immo not found with pattern 1
+    if immo_start_address == "0x7ffe0":
+        print("Immo not found with string1, trying string2")
+        immo_start_address = search_immo_start(args.binary_file,immo_start_pattern2)
+    if immo_start_address == "0x7ffe0":
+        print("Immo not found or string incorrect")
+        sys.exit()
     val1, val2, val3, val4 = get_immo_patch_addresses(immo_start_address,args.binary_file)
     write_immo_patch_defs(immo_start_address,val1, val2, val3, val4, output_file)
     print("File written, copy into ECU Defs XML")
